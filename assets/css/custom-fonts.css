@@ -1,0 +1,20 @@
+/* Example for one font family with multiple weights */
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../fonts/CustomFont-Regular.woff2') format('woff2'),
+         url('../fonts/CustomFont-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'CustomFont';
+    src: url('../fonts/CustomFont-Bold.woff2') format('woff2'),
+         url('../fonts/CustomFont-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  /* Repeat for other weights, styles, or font families */
