@@ -19,3 +19,11 @@ add_action('wp_enqueue_scripts', 'musketeer_enqueue_assets');
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
     require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
+
+function register_custom_patterns() {
+    register_block_pattern_category(
+        'Musketeer',
+        array( 'label' => __( 'Musketeer', 'musketeer' ) )
+    );
+}
+add_action( 'init', 'register_custom_patterns' );
