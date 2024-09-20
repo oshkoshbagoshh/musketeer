@@ -20,3 +20,7 @@ wp-content/backups/
 wp-content/languages/
 
 # Ignore .todo files
+
+
+# build file
+/build/ 
