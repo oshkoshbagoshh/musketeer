@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - TFNMS</title>
+    <style>
+        /* Basic reset and responsive design */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #1e0f2e, #170b3b);
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: grid;
+            gap: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #5ce1e6;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #5ce1e6;
+            color: #1e0f2e;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #4ac1c6;
+        }
+        .error {
+            color: #ff6b6b;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Get a Quote or Set Up a Consultation</h1>
+        <form id="contactForm">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error" id="nameError"></span>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error" id="emailError"></span>
+            </div>
+            <div>
+                <label for="service">Service:</label>
+                <select id="service" name="service" required>
+                    <option value="">Select a service</option>
+                    <option value="media">Media Solutions</option>
+                    <option value="music">Music Services</option>
+                </select>
+                <span class="error" id="serviceError"></span>
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                <span class="error" id="messageError"></span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="calendlyWidget" style="margin-top: 20px;"></div>
+    </div>
+
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script>
+        // Form validation and submission
+        const form = document.getElementById('contactForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const serviceInput = document.getElementById('service');
+        const messageInput = document.getElementById('message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                // If form is valid, you can submit it to your backend here
+                console.log('Form submitted successfully');
+                // Reset form after submission
+                form.reset();
+                // Show Calendly widget after form submission
+                showCalendly();
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+
+            if (nameInput.value.trim() === '') {
+                showError('nameError', 'Name is required');
+                isValid = false;
+            } else {
+                showError('nameError', '');
+            }
+
+            if (emailInput.value.trim() === '') {
+                showError('emailError', 'Email is required');
+                isValid = false;
+            } else if (!isValidEmail(emailInput.value)) {
+                showError('emailError', 'Please enter a valid email');
+                isValid = false;
+            } else {
+                showError('emailError', '');
+            }
+
+            if (serviceInput.value === '') {
+                showError('serviceError', 'Please select a service');
+                isValid = false;
+            } else {
+                showError('serviceError', '');
+            }
+
+            if (messageInput.value.trim() === '') {
+                showError('messageError', 'Message is required');
+                isValid = false;
+            } else {
+                showError('messageError', '');
+            }
+
+            return isValid;
+        }
+
+        function showError(id, message) {
+            document.getElementById(id).textContent = message;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Calendly integration
+        function showCalendly() {
+            Calendly.initInlineWidget({
+                url: 'https://calendly.com/ajavadi202',
+                parentElement: document.getElementById('calendlyWidget'),
+                prefill: {
+                    name: nameInput.value,
+                    email: emailInput.value
+                }
+            });
+        }
+    </script>
+</body>
+</html>
