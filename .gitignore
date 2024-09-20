@@ -1,3 +1,22 @@
+# Ignore Composer dependencies
 /vendor/
-node_modules/
+
+# Ignore Node.js dependencies
+/node_modules/
+
+# Ignore local development environment files
+.env
 .DS_Store
+
+# Ignore WordPress specific files
+wp-config.php
+wp-content/uploads/
+wp-content/upgrade/
+wp-content/backup-db/
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/
+wp-content/backups/
+wp-content/languages/
+
+# Ignore .todo files
